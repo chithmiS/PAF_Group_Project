@@ -96,6 +96,16 @@ public class Bill
 		}
 		
 		
+		//calculate monthly total amount
+		public Double Amount(Double usage,Double rate) {
+			
+			return usage*rate;
+		}
+		
+		
+		
+		
+		
 		
 }
 		
