@@ -130,6 +130,52 @@ public class Customer {
 		 } 
 		
 		
+		public String updateCustomer(String CustomerID,String NIC , String firstname,String lastname, String homeNo,String street, String city,String phone, String account)
+
+		{ 
+			 String output = ""; 
+			 try
+			 { 
+			 Connection con = connect(); 
+			 if (con == null) 
+			 {return "Error while connecting to the database for updating."; } 
+			 
+			 
+			 // create a prepared statement
+			 String query = "UPDATE customers SET NIC=?,CustomerFirstName=?,CustomerLastName=?,HomeNo=?,Street=?,HomeCity=?,CustomerPhone=? ,AccountNo=? WHERE CustomerID=?"; 
+			 PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 
+			 // binding values
+			
+			
+			 preparedStmt.setString(1, NIC);
+			 preparedStmt.setString(2, firstname);
+			 preparedStmt.setString(3, lastname);
+			 preparedStmt.setString(4, homeNo);
+			 preparedStmt.setString(5, street);
+			 preparedStmt.setString(6, city);
+			 preparedStmt.setInt(7, Integer.parseInt(phone));
+			// preparedStmt.setInt(8, Integer.parseInt(account));
+			 preparedStmt.setString(8, account);
+			 preparedStmt.setInt(9, Integer.parseInt(CustomerID));
+			 
+			 
+			 // execute the statement
+			 preparedStmt.execute(); 
+			 con.close(); 
+			 output = "Updated successfully"; 
+			 } 
+			 catch (Exception e) 
+			 { 
+			 output = "Error while updating the Customer."; 
+			 System.err.println(e.getMessage()); 
+			 } 
+			 return output; 
+			 }
+		
+		
+		
+		
 		
 
 

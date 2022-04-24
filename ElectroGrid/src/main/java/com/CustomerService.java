@@ -4,9 +4,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import model.Customer;
 
@@ -39,6 +43,31 @@ public class CustomerService {
 	public String readCustomers()
 	 {
 	 return customerObj.readCustomers();
+	}
+	
+	
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateCustomer(String customerData)
+	{
+	//Convert the input string to a JSON object
+	 JsonObject customerObject = new JsonParser().parse(customerData).getAsJsonObject();
+	 
+	//Read the values from the JSON object
+	 String CustomerID = customerObject.get("CustomerID").getAsString();
+	 String NIC = customerObject.get("NIC").getAsString();
+	 String CustomerFirstName = customerObject.get("CustomerFirstName").getAsString();
+	 String CustomerLastName = customerObject.get("CustomerLastName").getAsString();
+	 String HomeNo = customerObject.get("HomeNo").getAsString();
+	 String Street = customerObject.get("Street").getAsString();
+	 String City = customerObject.get("HomeCity").getAsString();
+	 String CustomerPhone = customerObject.get("CustomerPhone").getAsString();
+	 String AccountNo= customerObject.get("AccountNo").getAsString();
+	 String output = customerObj.updateCustomer(CustomerID,NIC, CustomerFirstName,CustomerLastName, HomeNo, Street, City,CustomerPhone,AccountNo);
+	return output;
 	}
 
 
