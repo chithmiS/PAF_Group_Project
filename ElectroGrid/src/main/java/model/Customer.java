@@ -64,6 +64,73 @@ public class Customer {
 		 return output;
 		 } 
 		
+		
+		
+		public String readCustomers()
+		 {
+		 String output = "";
+		 try
+		 {
+		 Connection con = connect();
+		 if (con == null)
+		 {return "Error while connecting to the database for reading."; }
+		 
+		 // Prepare the html table to be displayed
+		 output = "<table border='1'><tr>"+"<th>Customer ID</th>"+"<th> NIC Number </th>"+"<th>Customer First Name </th>" +
+		 "<th>Customer Last Name </th>" +"<th> Home No </th>" + "<th> Street </th>" + "<th> City </th>" +
+		 "<th>Phone Number </th>" + "<th> Account Number </th>"+
+		 "<th> Update </th> <th>Remove</th></tr>";
+
+		 String query = "select * from customers";
+		 Statement stmt = con.createStatement();
+		 ResultSet rs = stmt.executeQuery(query);
+		 
+		 // iterate through the rows in the result set
+		 while (rs.next())
+		 {
+		 String CustomerID = Integer.toString(rs.getInt("CustomerID"));
+		 String NIC = rs.getString("NIC");
+		 String CustomerFirstName = rs.getString("CustomerFirstName");
+		 String CustomerLastName = rs.getString("CustomerLastName");
+		 String HomeNo = rs.getString("HomeNo");
+		 String Street = rs.getString("Street");
+		 String City = rs.getString("HomeCity");
+		 String CustomerPhone = Integer.toString(rs.getInt("CustomerPhone"));
+		 String AccountNo = rs.getString("AccountNo");
+		// String AccountNo = Integer.toString(rs.getInt("AccountNo"));
+		
+		 
+		 // Add into the html table
+		 output += "<tr><td>" + CustomerID + "</td>";
+		 output += "<td>" + NIC + "</td>";
+		 output += "<td>" + CustomerFirstName + "</td>";
+		 output += "<td>" + CustomerLastName + "</td>";
+		 output += "<td>" +  HomeNo + "</td>";
+		 output += "<td>" +  Street + "</td>";
+		 output += "<td>" +  City + "</td>";
+		 output += "<td>" + CustomerPhone + "</td>";
+		 output += "<td>" + AccountNo + "</td>";
+		 
+		 // buttons
+		 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+		 + "<td><form method='post' action='items.jsp'>" + "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
+		 + "<input name='itemID' type='hidden' value='" + CustomerID
+		 + "'>" + "</form></td></tr>";
+		 }
+		 con.close();
+		 // Complete the html table
+		 output += "</table>";
+		 }
+		 catch (Exception e)
+		 {
+		 output = "Error while reading the Customers.";
+		 System.err.println(e.getMessage());
+		 }
+		 return output;
+		 } 
+		
+		
+		
 
 
 }

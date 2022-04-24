@@ -2,6 +2,7 @@ package com;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,5 +31,15 @@ public class CustomerService {
 	 String output = customerObj.insertCustomer(NIC,CustomerFirstName,CustomerLastName,HomeNo,Street,City,CustomerPhone,AccountNo);
 	return output;
 	}
+	
+	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readCustomers()
+	 {
+	 return customerObj.readCustomers();
+	}
+
 
 }
