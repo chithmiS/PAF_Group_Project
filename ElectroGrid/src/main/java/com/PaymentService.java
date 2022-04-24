@@ -35,5 +35,19 @@ public class PaymentService {
 		 String output = paymentObj.insertPayment(AccNumber, totalAmount, payDate, cardType, cardNumber, cvn);
 		return output;
 		}
+		
+		
+		//read payment details
+		
+		@GET
+		@Path("/")
+		@Produces(MediaType.TEXT_HTML)
+		public String readPayments()
+		 {
+		 return paymentObj.readPayments();
+		 }
+		
+		
+		
 
 }
