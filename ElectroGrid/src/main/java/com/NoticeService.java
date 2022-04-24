@@ -31,5 +31,7 @@ public class NoticeService {
 	 { 
 	 return noticeObj.readNotices(); 
 	}
+	
+	
 
 }
