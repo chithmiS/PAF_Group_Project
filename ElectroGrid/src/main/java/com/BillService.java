@@ -93,6 +93,20 @@ public class BillService {
 		return output;
 		}
 		
+		@GET
+		@Path("/search")
+		@Produces(MediaType.TEXT_HTML)
+		public String searchBill(String billData)
+		{
+			
+			//Convert the input string to an XML document
+			Document doc = Jsoup.parse(billData, "", Parser.xmlParser());
+			
+			//Read the value from the element <bill_ID>
+			String bill_id = doc.select("bill_id").text();
+			
+			return billObj.searchBill(bill_id);
+		}
 		
 		
 		
