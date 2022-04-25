@@ -137,5 +137,55 @@ public String readPayments()
 	 return output;
 }
 
+public String updatePayment(String payID, String AccNumber, String totalAmount, String payDate, String cardType, String cardNumber, String cvn)
+
+{
+		
+	 String output = "";
 	 
+	 java.util.Date dateObj;
+	 
+	 try
+	 {
+		 Connection con = connect();
+		 
+	 if (con == null)
+	 {return "Error while connecting to the database for updating."; }
+	 
+	 // create a prepared statement
+	 
+	 String query = "UPDATE payments SET AccNumber=?,totalAmount=?,payDate=?,cardType=?,cardNumber=?,cvn=? WHERE payID=?";
+	 PreparedStatement preparedStmt = con.prepareStatement(query);
+	 
+	 // binding values
+	 
+	 preparedStmt.setString(1, AccNumber);
+	 preparedStmt.setDouble(2, Double.parseDouble(totalAmount));
+	
+	 
+	 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+	 dateObj = format.parse(payDate);
+	 preparedStmt.setDate(3, new java.sql.Date(dateObj.getTime()));
+	 
+	 
+	 preparedStmt.setString(4, cardType);
+	 preparedStmt.setString(5, cardNumber);
+	 preparedStmt.setString(6, cvn);
+	 preparedStmt.setInt(7, Integer.parseInt(payID));
+	 
+	 // execute the statement
+	 
+	 preparedStmt.execute();
+	 con.close();
+	 output = "Updated successfully";
+	 }
+	 catch (Exception e)
+	 {
+		 output = "Error while updating the item.";
+		 System.err.println(e.getMessage());
+	 }
+	 return output;
+}
+
+
 }

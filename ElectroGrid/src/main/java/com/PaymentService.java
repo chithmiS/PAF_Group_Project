@@ -48,6 +48,33 @@ public class PaymentService {
 		 }
 		
 		
+		//update payment details
+		
+		@PUT
+		@Path("/")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		public String updatePayment(String paymentData)
+		{
+					
+			//Convert the input string to a JSON object
+					
+			JsonObject paymentObject = new JsonParser().parse(paymentData).getAsJsonObject();
+				 
+			//Read the values from the JSON object
+				 
+				 String payID = paymentObject.get("payID").getAsString();
+				 String AccNumber = paymentObject.get("AccNumber").getAsString();
+				 String totalAmount = paymentObject.get("totalAmount").getAsString();
+				 String payDate = paymentObject.get("payDate").getAsString();
+				 String cardType = paymentObject.get("cardType").getAsString();
+				 String cardNumber = paymentObject.get("cardNumber").getAsString();
+				 String cvn = paymentObject.get("cvn").getAsString();
+				 String output = paymentObj.updatePayment(payID, AccNumber, totalAmount, payDate, cardType, cardNumber, cvn);
+				 
+			return output;
+			}
+		
 		
 
 }
