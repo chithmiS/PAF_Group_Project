@@ -32,6 +32,23 @@ public class NoticeService {
 	 return noticeObj.readNotices(); 
 	}
 	
+	@PUT
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String updateNotice(String noticeData) 
+	{ 
+	//Convert the input string to a JSON object 
+	 JsonObject noticeObject = new JsonParser().parse(noticeData).getAsJsonObject(); 
+	//Read the values from the JSON object
+	 String NoticeId = noticeObject.get("NoticeId").getAsString(); 
+	 String userId = noticeObject.get("userId").getAsString(); 
+	 String noticeSubject = noticeObject.get("noticeSubject").getAsString(); 
+	 String noticeBody = noticeObject.get("noticeBody").getAsString(); 
+	 String output = noticeObj.updateNotice(NoticeId, userId, noticeSubject, noticeBody); 
+	return output; 
+	}
+	
 	
 
 }

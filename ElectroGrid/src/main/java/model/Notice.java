@@ -111,7 +111,46 @@ public class Notice {
 	
 	
 
-	
+	//update notice
+	public String updateNotice(String  NoticeId, String userId, String noticeSubject, String noticeBody) 
 
+
+	{ 
+		 String output = ""; 
+		 java.util.Date dateObj;
+		 
+		 try
+		 { 
+			 Connection con = connect(); 
+		 if (con == null) 
+		 {return "Error while connecting to the database for updating."; } 
+		 
+		 // create a prepared statement
+		 String query = "UPDATE notices SET userId=?,noticeSubject=?,noticeBody=?,date=? WHERE NoticeId=?"; 
+		 PreparedStatement preparedStmt = con.prepareStatement(query); 
+		 
+		 // binding values
+		 preparedStmt.setString(1, userId); 
+		 preparedStmt.setString(2, noticeSubject); 
+		 preparedStmt.setString(3, noticeBody); 
+		 
+		 Date date = new Date();  
+		 preparedStmt.setDate(4, new java.sql.Date(date.getTime()));
+		 preparedStmt.setInt(5, Integer.parseInt(NoticeId)); 
+		 
+		 // execute the statement
+		 preparedStmt.execute(); 
+		 con.close(); 
+		 output = "Updated successfully"; 
+		 } 
+		 catch (Exception e) 
+		 { 
+			 output = "Error while updating the notice."; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		 return output; 
+		 } 
+
+	
 
 }
