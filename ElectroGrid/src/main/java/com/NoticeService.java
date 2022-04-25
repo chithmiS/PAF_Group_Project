@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 public class NoticeService {
 	Notice noticeObj = new Notice();
 
+	//Add notices
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -24,6 +25,7 @@ public class NoticeService {
 		return output;
 	}
 
+	//View notices
 	@GET
 	@Path("/") 
 	@Produces(MediaType.TEXT_HTML) 
@@ -32,6 +34,8 @@ public class NoticeService {
 	 return noticeObj.readNotices(); 
 	}
 	
+	
+	//Update notices
 	@PUT
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_JSON) 
@@ -49,6 +53,8 @@ public class NoticeService {
 	return output; 
 	}
 	
+	
+	//Delete notices
 	@DELETE
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 

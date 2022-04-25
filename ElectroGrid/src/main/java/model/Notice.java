@@ -52,7 +52,7 @@ public class Notice {
 		return output;
 	}
 
-	//view notices
+	//view notice
 	public String readNotices() 
 	 { 
 		String output = ""; 
