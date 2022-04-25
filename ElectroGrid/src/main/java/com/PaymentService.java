@@ -101,7 +101,7 @@ public class PaymentService {
 			//search payment details
 			
 			@GET
-			@Path("/search")
+			@Path("/view")
 			@Produces(MediaType.TEXT_HTML)
 			public String readPayments(String paymentData) 
 			{

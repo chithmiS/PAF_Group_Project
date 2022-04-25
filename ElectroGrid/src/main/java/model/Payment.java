@@ -88,8 +88,8 @@ public String readPayments()
 		 "<th>Payment Date</th>" +
 		 "<th>Card Type</th>" +
 		 "<th>Card Number</th>" +
-		 "<th>CVN</th>" +
-		 "<th>Update</th><th>Remove</th></tr>";
+		 "<th>CVN</th>" ;
+		
 		
 		 String query = "select * from payments";
 		 Statement stmt = con.createStatement();
@@ -116,12 +116,7 @@ public String readPayments()
 		 output += "<td>" + cardType + "</td>";
 		 output += "<td>" + cardNumber + "</td>";
 		 output += "<td>" + cvn + "</td>";
-		 
-		 // Add buttons
-		 
-		 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
-		 + "<td><form method='post' action='payments.jsp'>"+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
-		 + "</form></td></tr>";
+		
 		 }
 		 con.close();
 		 
