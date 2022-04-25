@@ -75,6 +75,11 @@ public class BillService {
 		String output = billObj.updateBill(bill_id,acc_number, name,month, power_consumption, rate,total_amount,date);
 		return output;
 		}
+		
+		
+		
+		
+		
 }
 
 
