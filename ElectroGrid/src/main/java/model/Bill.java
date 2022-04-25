@@ -128,6 +128,47 @@ public class Bill
 		}
 		
 		
+		//insert data
+		public String insertBill(String acc_number, String name,String month, Double power_consumption, Double rate, Double total_amount)
+		{
+			String output = "";
+			try
+			{
+				Connection con = connect();
+				
+				if (con == null)
+				{return "Error while connecting to the database for inserting."; }
+				
+				// create a prepared statement
+				String query = " insert into bills(`bill_id`,`acc_number`,`name`,`month`,`power_consumption`,`rate`,`total_amount`,`date`)"
+				+ " values (?, ?, ?, ?, ?,?,?,?)";
+		
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+				// binding values
+				preparedStmt.setInt(1, 0);
+				preparedStmt.setString(2, acc_number);
+				preparedStmt.setString(3 ,name);
+				preparedStmt.setString(4 ,month);
+				preparedStmt.setDouble(5, power_consumption);
+				preparedStmt.setDouble(6, rate);			
+				preparedStmt.setDouble(7,total_amount);
+				preparedStmt.setDate(8, new java.sql.Date(System.currentTimeMillis()));
+				
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Data inserted successfully";
+				
+			}
+			catch (Exception e)
+			{
+				output = "Error while inserting the item.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+		
 		
 		
 		
