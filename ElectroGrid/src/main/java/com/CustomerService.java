@@ -91,6 +91,21 @@ public class CustomerService {
 	 String output = customerObj.deleteCustomer(CustomerID);
 	return output;
 	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.TEXT_HTML)
+	public String searchCustomers(String customerData)
+	{
+		
+		//Convert the input string to an XML document
+		Document doc = Jsoup.parse(customerData, "", Parser.xmlParser());
+		
+		//Read the value from the element <bill_ID>
+		String nic = doc.select("NIC").text();
+		
+		return customerObj.searchCustomers(nic);
+	}
 
 
 }
