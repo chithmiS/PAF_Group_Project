@@ -76,5 +76,43 @@ public class PaymentService {
 			}
 		
 		
+			//delete payment details
+			
+			@DELETE
+			@Path("/")
+			@Consumes(MediaType.APPLICATION_XML)
+			@Produces(MediaType.TEXT_PLAIN)
+			public String deletePayment(String paymentData)
+			{
+				
+			//Convert the input string to an XML document
+				
+			 Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser());
+			 
+	
+			//Read the value from the element <itemID>
+			 
+			 String payID = doc.select("payID").text();
+			 String output = paymentObj.deletePayment(payID);
+			return output;
+			}
+			
+			
+			//search payment details
+			
+			@GET
+			@Path("/search")
+			@Produces(MediaType.TEXT_HTML)
+			public String readPayments(String paymentData) 
+			{
+				 Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser());
+				
+				String AccNumber = doc.select("AccNumber").text();
+				
+				return paymentObj.readPayments(AccNumber);
+			}
+
+		
+		
 
 }

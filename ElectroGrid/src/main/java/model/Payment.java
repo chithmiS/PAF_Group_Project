@@ -188,4 +188,112 @@ public String updatePayment(String payID, String AccNumber, String totalAmount, 
 }
 
 
+public String deletePayment(String payID)
+{
+	 String output = "";
+	 
+	 try
+	 {
+		 Connection con = connect();
+		 
+	 if (con == null)
+	 {return "Error while connecting to the database for deleting."; }
+	 
+	 // create a prepared statement
+	 
+	 String query = "delete from payments where payID=?";
+	 PreparedStatement preparedStmt = con.prepareStatement(query);
+	 
+	 // binding values
+	 
+	 preparedStmt.setInt(1, Integer.parseInt(payID));
+	 
+	 // execute the statement
+	 
+	 preparedStmt.execute();
+	 con.close();
+	 output = "Deleted successfully";
+	 }
+	 catch (Exception e)
+	 {
+		 output = "Error while deleting the item.";
+		 System.err.println(e.getMessage());
+	 }
+	 return output;
+	 }
+
+
+
+//create search method
+
+public String readPayments(String Acc_Number)
+{
+	 String output = "";
+	 try
+	 {
+		 Connection con = connect();
+		 
+		 if (con == null)
+		 {return "Error while connecting to the database for reading."; }
+		 
+		 // Prepare the HTML table to be displayed
+		 
+		 output = "<table border='1'><tr><th>Payment ID</th><th>Account Number</th>" +
+		 "<th>Total Amount</th>" +
+		 "<th>Payment Date</th>" +
+		 "<th>Card Type</th>" +
+		 "<th>Card Number</th>" +
+		 "<th>CVN</th>" +
+		 "<th>Update</th><th>Remove</th></tr>";
+		
+		 String query = "select * from payments where AccNumber=?";
+		 PreparedStatement preparedStmt = con.prepareStatement(query);
+		 
+		 preparedStmt.setString(1, Acc_Number);
+		 
+		 ResultSet rs = preparedStmt.executeQuery();
+		 
+		 // iterate through the rows in the result set
+		 
+		 while (rs.next())
+		 {
+		 String payID = Integer.toString(rs.getInt("payID"));
+		 String AccNumber = rs.getString("AccNumber");
+		 String totalAmount = Double.toString(rs.getDouble("totalAmount"));
+		 String payDate = rs.getString("payDate");
+		 String cardType = rs.getString("cardType");
+		 String cardNumber = rs.getString("cardNumber");
+		 String cvn = rs.getString("cvn");
+		 
+		 // Add into the HTML table
+		 
+		 output += "<tr><td>" + payID + "</td>";
+		 output += "<td>" + AccNumber + "</td>";
+		 output += "<td>" + totalAmount + "</td>";
+		 output += "<td>" + payDate + "</td>";
+		 output += "<td>" + cardType + "</td>";
+		 output += "<td>" + cardNumber + "</td>";
+		 output += "<td>" + cvn + "</td>";
+		 
+		 // Add buttons
+		 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
+		 + "<td><form method='post' action='payments.jsp'>"+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
+		 + "</form></td></tr>";
+		 }
+		 con.close();
+		 
+		 // Complete the HTML table
+		 
+		 output += "</table>";
+	 }
+	 catch (Exception e)
+	 {
+		 output = "Error while reading the items.";
+		 System.err.println(e.getMessage());
+	 }
+	 return output;
+}
+
+
+
 }
