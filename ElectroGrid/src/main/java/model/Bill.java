@@ -173,6 +173,51 @@ public class Bill
 		}
 		
 		
+		
+		
+		//updateBill method to update bills
+		public String updateBill(String bill_id, String acc_number, String name,String month, Double power_consumption, Double rate, Double total_amount,String date)
+		{
+			
+			String output = "";
+			java.util.Date dateObj;
+			try
+			{
+				Connection con = connect();
+				if (con == null)
+				{return "Error while connecting to the database for updating."; }
+					
+				// create a prepared statement
+				String query = "UPDATE bills SET acc_number=?,name=?,month=?,power_consumption=?,rate=?,total_amount=?, date=? WHERE bill_id=?";
+				PreparedStatement preparedStmt = con.prepareStatement(query);
+					
+				// binding values
+				preparedStmt.setString(1, acc_number);
+				preparedStmt.setString(2, name);
+				preparedStmt.setString(3, month);
+				preparedStmt.setDouble(4, power_consumption);
+				preparedStmt.setDouble(5, rate);
+				preparedStmt.setDouble(6, total_amount);			
+					
+				SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+				dateObj = format.parse(date);
+				preparedStmt.setDate(7, new java.sql.Date(dateObj.getTime()));
+				preparedStmt.setInt(8, Integer.parseInt(bill_id));
+					
+				// execute the statement
+				preparedStmt.execute();
+				con.close();
+				output = "Bill Updated successfully";
+			}
+			catch (Exception e)
+			{
+				output = "Error while updating the bill.";
+				System.err.println(e.getMessage());
+			}
+			return output;
+		}
+		
+		
 	
 		
 		
