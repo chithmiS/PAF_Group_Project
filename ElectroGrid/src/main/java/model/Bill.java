@@ -41,7 +41,6 @@ public class Bill
 								+ "<th>Name</th>" 
 								+ "<th>Month</th>" 
 								+ "<th>No of units Consumed</th>" 
-								+ "<th>Rate per unit</th>" 
 								+ "<th>Monthly Total Amount</th>"
 								+ "<th>Date</th>"
 								+ "<th>Update</th>"
@@ -61,7 +60,6 @@ public class Bill
 					String name = rs.getString("name");
 					String month = rs.getString("month");
 					String power_consumption = Double.toString(rs.getDouble("power_consumption"));
-					String rate = Double.toString(rs.getDouble("rate"));
 					String total_amount = Double.toString(rs.getDouble("total_amount"));
 					String date = rs.getString("date");
 					
@@ -72,8 +70,7 @@ public class Bill
 					output += "<td>" + name + "</td>";
 					output += "<td>" + month + "</td>";
 					output += "<td>" + power_consumption + "</td>";
-					output += "<td>" + rate + "</td>";
-					output += "<td>" + total_amount + "</td>";
+					output += "<td>" +"Rs." + total_amount + "</td>";
 					output += "<td>" + date + "</td>";
 					
 					// buttons
@@ -132,7 +129,7 @@ public class Bill
 		
 		
 		//insertBill method to insert data
-		public String insertBill(String acc_number, String name,String month, Double power_consumption, Double rate, Double total_amount)
+		public String insertBill(String acc_number, String name,String month, Double power_consumption, Double total_amount)
 		{
 			String output = "";
 			try
@@ -143,8 +140,8 @@ public class Bill
 				{return "Error while connecting to the database for inserting."; }
 				
 				// create a prepared statement
-				String query = " insert into bills(`bill_id`,`acc_number`,`name`,`month`,`power_consumption`,`rate`,`total_amount`,`date`)"
-				+ " values (?, ?, ?, ?, ?,?,?,?)";
+				String query = " insert into bills(`bill_id`,`acc_number`,`name`,`month`,`power_consumption`,`total_amount`,`date`)"
+				+ " values (?, ?, ?, ?, ?,?,?)";
 		
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 			
@@ -153,10 +150,9 @@ public class Bill
 				preparedStmt.setString(2, acc_number);
 				preparedStmt.setString(3 ,name);
 				preparedStmt.setString(4 ,month);
-				preparedStmt.setDouble(5, power_consumption);
-				preparedStmt.setDouble(6, rate);			
-				preparedStmt.setDouble(7,total_amount);
-				preparedStmt.setDate(8, new java.sql.Date(System.currentTimeMillis()));
+				preparedStmt.setDouble(5, power_consumption);			
+				preparedStmt.setDouble(6,total_amount);
+				preparedStmt.setDate(7, new java.sql.Date(System.currentTimeMillis()));
 				
 				// execute the statement
 				preparedStmt.execute();
@@ -176,7 +172,7 @@ public class Bill
 		
 		
 		//updateBill method to update bills
-		public String updateBill(String bill_id, String acc_number, String name,String month, Double power_consumption, Double rate, Double total_amount,String date)
+		public String updateBill(String bill_id, String acc_number, String name,String month, Double power_consumption, Double total_amount,String date)
 		{
 			
 			String output = "";
@@ -188,7 +184,7 @@ public class Bill
 				{return "Error while connecting to the database for updating."; }
 					
 				// create a prepared statement
-				String query = "UPDATE bills SET acc_number=?,name=?,month=?,power_consumption=?,rate=?,total_amount=?, date=? WHERE bill_id=?";
+				String query = "UPDATE bills SET acc_number=?,name=?,month=?,power_consumption=?,total_amount=?, date=? WHERE bill_id=?";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 					
 				// binding values
@@ -196,13 +192,12 @@ public class Bill
 				preparedStmt.setString(2, name);
 				preparedStmt.setString(3, month);
 				preparedStmt.setDouble(4, power_consumption);
-				preparedStmt.setDouble(5, rate);
-				preparedStmt.setDouble(6, total_amount);			
+				preparedStmt.setDouble(5, total_amount);			
 					
 				SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 				dateObj = format.parse(date);
-				preparedStmt.setDate(7, new java.sql.Date(dateObj.getTime()));
-				preparedStmt.setInt(8, Integer.parseInt(bill_id));
+				preparedStmt.setDate(6, new java.sql.Date(dateObj.getTime()));
+				preparedStmt.setInt(7, Integer.parseInt(bill_id));
 					
 				// execute the statement
 				preparedStmt.execute();
@@ -271,7 +266,6 @@ public class Bill
 								+ "<th>Name</th>" 
 								+ "<th>Month</th>" 
 								+ "<th>No of units Consumed</th>" 
-								+ "<th>Rate per unit</th>" 
 								+ "<th>Monthly Total Amount</th>"
 								+ "<th>Date</th>"
 								+ "<th>Update</th>"
@@ -295,7 +289,6 @@ public class Bill
 					String name = rs.getString("name");
 					String month = rs.getString("month");
 					String power_consumption = Double.toString(rs.getDouble("power_consumption"));
-					String rate = Double.toString(rs.getDouble("rate"));
 					String total_amount = Double.toString(rs.getDouble("total_amount"));
 					String date = rs.getString("date");
 					
@@ -306,8 +299,7 @@ public class Bill
 					output += "<td>" + name + "</td>";
 					output += "<td>" + month + "</td>";
 					output += "<td>" + power_consumption + "</td>";
-					output += "<td>" + rate + "</td>";
-					output += "<td>" + total_amount + "</td>";
+					output += "<td>" +"Rs." + total_amount + "</td>";
 					output += "<td>" + date + "</td>";
 					
 					// buttons

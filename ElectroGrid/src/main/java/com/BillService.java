@@ -38,15 +38,14 @@ public class BillService {
 				@FormParam("acc_number") String acc_number,
 				@FormParam("name") String name,
 				@FormParam("month") String month,
-				@FormParam("power_consumption") Double power_consumption,
-				@FormParam("rate") Double rate)
+				@FormParam("power_consumption") Double power_consumption)
 				{
 				
 					//calling calculateAmount function
 					Double amount = billObj.calculateAmount(power_consumption);
 					
 					//call insertBill method
-					String output = billObj.insertBill(acc_number, name,month, power_consumption, rate,amount);
+					String output = billObj.insertBill(acc_number, name,month, power_consumption,amount);
 					return output;
 				}
 		@PUT
@@ -65,16 +64,16 @@ public class BillService {
 		String name = billObject.get("name").getAsString();
 		String month = billObject.get("month").getAsString();
 		Double power_consumption = billObject.get("power_consumption").getAsDouble();
-		Double rate = billObject.get("rate").getAsDouble();
-		//Double total_amount = billObject.get("total_amount").getAsDouble();
 		String date = billObject.get("date").getAsString();
 		
 		//calling calculateAmount function
 		Double total_amount = billObj.calculateAmount(power_consumption);
 		
-		String output = billObj.updateBill(bill_id,acc_number, name,month, power_consumption, rate,total_amount,date);
+		String output = billObj.updateBill(bill_id,acc_number, name,month, power_consumption,total_amount,date);
 		return output;
 		}
+		
+		
 		
 		
 		@DELETE
@@ -92,6 +91,8 @@ public class BillService {
 		String output = billObj.deleteBill(bill_id);
 		return output;
 		}
+		
+		
 		
 		@GET
 		@Path("/search")
