@@ -23,7 +23,7 @@ public class Customer {
 		 } 
 
 		
-		public String insertCustomer(String NIC , String firstname,String lastname, String homeNo,String street, String city,String phone, String account)
+		public String insertCustomer(String NIC , String firstname,String lastname, String homeNo,String street, String city,String phone, String account,String Password)
 		 {
 		 String output = "";
 		 try
@@ -33,8 +33,8 @@ public class Customer {
 		 {return "Error while connecting to the database for inserting."; }
 		 
 		 // create a prepared statement
-		 String query = " insert into customers (`CustomerID`,`NIC`,`CustomerFirstName`,`CustomerLastName`,`HomeNo`,`Street`,`HomeCity`,`CustomerPhone`,`AccountNo`)"
-		                + " values (?, ?, ?, ?, ?,?,?,?,?)";
+		 String query = " insert into customers (`CustomerID`,`NIC`,`CustomerFirstName`,`CustomerLastName`,`HomeNo`,`Street`,`HomeCity`,`CustomerPhone`,`AccountNo`,`Password`)"
+		                + " values (?, ?, ?, ?, ?,?,?,?,?,?)";
 		 
 		 PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
@@ -48,6 +48,7 @@ public class Customer {
 		 preparedStmt.setString(7, city);
 		 preparedStmt.setInt(8, Integer.parseInt(phone));
 		 preparedStmt.setString(9, account);
+		 preparedStmt.setString(10, Password);
 		// preparedStmt.setInt(9, Integer.parseInt(account));
 		 
 		 // execute the statement
@@ -78,7 +79,7 @@ public class Customer {
 		 // Prepare the html table to be displayed
 		 output = "<table border='1'><tr>"+"<th>Customer ID</th>"+"<th> NIC Number </th>"+"<th>Customer First Name </th>" +
 		 "<th>Customer Last Name </th>" +"<th> Home No </th>" + "<th> Street </th>" + "<th> City </th>" +
-		 "<th>Phone Number </th>" + "<th> Account Number </th>"+
+		 "<th>Phone Number </th>" + "<th> Account Number </th>"+ "<th> Password </th>"+
 		 "<th> Update </th> <th>Remove</th></tr>";
 
 		 String query = "select * from customers";
@@ -97,6 +98,7 @@ public class Customer {
 		 String City = rs.getString("HomeCity");
 		 String CustomerPhone = Integer.toString(rs.getInt("CustomerPhone"));
 		 String AccountNo = rs.getString("AccountNo");
+		 String Password = rs.getString("Password");
 		// String AccountNo = Integer.toString(rs.getInt("AccountNo"));
 		
 		 
@@ -110,6 +112,7 @@ public class Customer {
 		 output += "<td>" +  City + "</td>";
 		 output += "<td>" + CustomerPhone + "</td>";
 		 output += "<td>" + AccountNo + "</td>";
+		 output += "<td>" + Password + "</td>";
 		 
 		 // buttons
 		 output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
@@ -130,7 +133,7 @@ public class Customer {
 		 } 
 		
 		
-		public String updateCustomer(String CustomerID,String NIC , String firstname,String lastname, String homeNo,String street, String city,String phone, String account)
+		public String updateCustomer(String CustomerID,String NIC , String firstname,String lastname, String homeNo,String street, String city,String phone, String account,String Password)
 
 		{ 
 			 String output = ""; 
@@ -142,7 +145,7 @@ public class Customer {
 			 
 			 
 			 // create a prepared statement
-			 String query = "UPDATE customers SET NIC=?,CustomerFirstName=?,CustomerLastName=?,HomeNo=?,Street=?,HomeCity=?,CustomerPhone=? ,AccountNo=? WHERE CustomerID=?"; 
+			 String query = "UPDATE customers SET NIC=?,CustomerFirstName=?,CustomerLastName=?,HomeNo=?,Street=?,HomeCity=?,CustomerPhone=? ,AccountNo=?,Password=? WHERE CustomerID=?"; 
 			 PreparedStatement preparedStmt = con.prepareStatement(query); 
 			 
 			 // binding values
@@ -157,7 +160,8 @@ public class Customer {
 			 preparedStmt.setInt(7, Integer.parseInt(phone));
 			// preparedStmt.setInt(8, Integer.parseInt(account));
 			 preparedStmt.setString(8, account);
-			 preparedStmt.setInt(9, Integer.parseInt(CustomerID));
+			 preparedStmt.setString(9, Password);
+			 preparedStmt.setInt(10, Integer.parseInt(CustomerID));
 			 
 			 
 			 // execute the statement

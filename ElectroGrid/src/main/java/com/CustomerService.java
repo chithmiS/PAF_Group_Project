@@ -35,9 +35,10 @@ public class CustomerService {
 	 @FormParam("Street") String Street,
 	 @FormParam("HomeCity") String City,
 	 @FormParam("CustomerPhone") String CustomerPhone,
-	 @FormParam("AccountNo") String AccountNo)
+	 @FormParam("AccountNo") String AccountNo,
+	 @FormParam("Password") String Password)
 	{
-	 String output = customerObj.insertCustomer(NIC,CustomerFirstName,CustomerLastName,HomeNo,Street,City,CustomerPhone,AccountNo);
+	 String output = customerObj.insertCustomer(NIC,CustomerFirstName,CustomerLastName,HomeNo,Street,City,CustomerPhone,AccountNo,Password);
 	return output;
 	}
 	
@@ -71,7 +72,8 @@ public class CustomerService {
 	 String City = customerObject.get("HomeCity").getAsString();
 	 String CustomerPhone = customerObject.get("CustomerPhone").getAsString();
 	 String AccountNo= customerObject.get("AccountNo").getAsString();
-	 String output = customerObj.updateCustomer(CustomerID,NIC, CustomerFirstName,CustomerLastName, HomeNo, Street, City,CustomerPhone,AccountNo);
+	 String Password= customerObject.get("Password").getAsString();
+	 String output = customerObj.updateCustomer(CustomerID,NIC, CustomerFirstName,CustomerLastName, HomeNo, Street, City,CustomerPhone,AccountNo,Password);
 	return output;
 	}
 	
