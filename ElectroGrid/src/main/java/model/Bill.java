@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Bill
 { 		
-		//A common method to connect to the DB
+		//method to connect to the DB
 		private Connection connect()
 		{
 			Connection con = null;
@@ -22,7 +22,7 @@ public class Bill
 		
 		
 		
-		//Retrive bills
+		//readBills method to view bills
 		public String readBills()
 		{
 			String output = "";
@@ -96,7 +96,8 @@ public class Bill
 		}
 		
 		
-		//calculate monthly total amount
+		
+		//method to calculate monthly total amount
 		public Double calculateAmount(Double usage) {
 			double total_amount;
 			double amount1;
@@ -128,7 +129,8 @@ public class Bill
 		}
 		
 		
-		//insert data
+		
+		//insertBill method to insert data
 		public String insertBill(String acc_number, String name,String month, Double power_consumption, Double rate, Double total_amount)
 		{
 			String output = "";
@@ -163,7 +165,7 @@ public class Bill
 			}
 			catch (Exception e)
 			{
-				output = "Error while inserting the item.";
+				output = "Error while inserting the bill.";
 				System.err.println(e.getMessage());
 			}
 			return output;
