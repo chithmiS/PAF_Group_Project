@@ -69,5 +69,7 @@ public class NoticeService {
 	 String output = noticeObj.deleteNotice(NoticeId); 
 	return output; 
 	}
+	
+	
 
 }
