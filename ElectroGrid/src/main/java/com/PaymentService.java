@@ -98,7 +98,7 @@ public class PaymentService {
 			}
 			
 			
-			//search payment details
+			//retrieve one customer's payment details
 			
 			@GET
 			@Path("/view")
@@ -111,8 +111,9 @@ public class PaymentService {
 				
 				return paymentObj.readPayments(AccNumber);
 			}
+			
+			
+			
 
-		
-		
 
 }

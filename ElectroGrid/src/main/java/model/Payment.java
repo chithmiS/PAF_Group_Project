@@ -64,7 +64,7 @@ public String insertPayment(String AccNumber, String totalAmount, String payDate
 		 
 		 catch (Exception e)
 		 {
-			 output = "Error while inserting the item.";
+			 output = "Error while inserting the payment.";
 			 System.err.println(e.getMessage());
 		 }
 		 return output;
@@ -126,7 +126,7 @@ public String readPayments()
 	 }
 	 catch (Exception e)
 	 {
-		 output = "Error while reading the items.";
+		 output = "Error while reading the payment.";
 		 System.err.println(e.getMessage());
 	 }
 	 return output;
@@ -176,7 +176,7 @@ public String updatePayment(String payID, String AccNumber, String totalAmount, 
 	 }
 	 catch (Exception e)
 	 {
-		 output = "Error while updating the item.";
+		 output = "Error while updating the payment.";
 		 System.err.println(e.getMessage());
 	 }
 	 return output;
@@ -211,7 +211,7 @@ public String deletePayment(String payID)
 	 }
 	 catch (Exception e)
 	 {
-		 output = "Error while deleting the item.";
+		 output = "Error while deleting the payment.";
 		 System.err.println(e.getMessage());
 	 }
 	 return output;
@@ -219,7 +219,7 @@ public String deletePayment(String payID)
 
 
 
-//create search method
+//Retrieve one customer's payment details
 
 public String readPayments(String Acc_Number)
 {
@@ -283,12 +283,11 @@ public String readPayments(String Acc_Number)
 	 }
 	 catch (Exception e)
 	 {
-		 output = "Error while reading the items.";
+		 output = "Error while reading the payments.";
 		 System.err.println(e.getMessage());
 	 }
 	 return output;
 }
-
 
 
 }
