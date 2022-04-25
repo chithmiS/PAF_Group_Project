@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class Bill
 { 		
@@ -170,6 +171,13 @@ public class Bill
 			}
 			return output;
 		}
+		
+		
+	
+		
+		
+		
+		
 		
 		
 		
