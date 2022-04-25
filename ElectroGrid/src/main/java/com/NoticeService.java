@@ -71,5 +71,21 @@ public class NoticeService {
 	}
 	
 	
+	//search notices
+		@GET
+		@Path("/search")
+		@Produces(MediaType.TEXT_HTML)
+		public String searchNotices(String noticeData)
+		{
+			
+			//Convert the input string to an XML document
+			Document doc = Jsoup.parse(noticeData, "", Parser.xmlParser());
+			
+			//Read the value from the element <bill_ID>
+			String NoticeId = doc.select("NoticeId").text();
+			
+			return noticeObj.searchNotices(NoticeId);
+		}
+	
 
 }
