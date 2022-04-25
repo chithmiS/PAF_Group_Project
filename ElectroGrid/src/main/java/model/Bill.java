@@ -218,11 +218,9 @@ public class Bill
 		}
 		
 		
-	
-		
-		
-		
-		
+				
+				
+				
 		
 		
 		

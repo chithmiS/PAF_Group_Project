@@ -49,7 +49,32 @@ public class BillService {
 					String output = billObj.insertBill(acc_number, name,month, power_consumption, rate,amount);
 					return output;
 				}
+		@PUT
+		@Path("/")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.TEXT_PLAIN)
+		public String updateBill(String billData)
+		{
+			
+		//Convert the input string to a JSON object
+		JsonObject billObject = new JsonParser().parse(billData).getAsJsonObject();
 		
+		//Read the values from the JSON object
+		String bill_id = billObject.get("bill_id").getAsString();
+		String acc_number = billObject.get("acc_number").getAsString();
+		String name = billObject.get("name").getAsString();
+		String month = billObject.get("month").getAsString();
+		Double power_consumption = billObject.get("power_consumption").getAsDouble();
+		Double rate = billObject.get("rate").getAsDouble();
+		//Double total_amount = billObject.get("total_amount").getAsDouble();
+		String date = billObject.get("date").getAsString();
+		
+		//calling calculateAmount function
+		Double total_amount = billObj.calculateAmount(power_consumption);
+		
+		String output = billObj.updateBill(bill_id,acc_number, name,month, power_consumption, rate,total_amount,date);
+		return output;
+		}
 }
 
 
