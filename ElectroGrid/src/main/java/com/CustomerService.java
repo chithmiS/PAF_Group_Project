@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -108,4 +109,13 @@ public class CustomerService {
 	}
 
 
+	
+	@GET
+	@Path("login/User/{name}/Password/{password}") 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String validateLogin(@PathParam("name") String name,
+			@PathParam("password") String password) 
+	{ 
+	     return customerObj.validateLogin(name,password);
+	}
 }

@@ -278,6 +278,61 @@ public class Customer {
 		 } 
 		
 		
+		//Login Method 
+		
+		public String validateLogin(String nic,String Password) 
+		{
+			try
+			{
+				 Connection con = connect(); 
+				 if (con == null) 
+				 {return "Error while connecting to the database for updating."; } 
+				 
+				 String  query = "select * from customers";
+				 Statement stmt = con.createStatement();
+				 ResultSet rs = stmt.executeQuery(query);
+				 
+				 while(rs.next())
+				 {
+					 String NIC= rs.getString("NIC");
+					 String CustomerID = Integer.toString(rs.getInt("CustomerID"));
+					 String password = rs.getString("Password");
+					 String CustomerFirstName = rs.getString("CustomerFirstName");
+					 String CustomerLastName = rs.getString("CustomerLastName");
+					 String HomeNo = rs.getString("HomeNo");
+					 String Street = rs.getString("Street");
+					 String City = rs.getString("HomeCity");
+					 String CustomerPhone = Integer.toString(rs.getInt("CustomerPhone"));
+					 String AccountNo = rs.getString("AccountNo");
+					// String Password = rs.getString("Password");
+					 
+					 if( NIC.equals(NIC) && Password.equals(password))
+					 {
+						 
+						 
+						 return ("welcome"+ "   "+ "    " + "   " +  "   " +  CustomerFirstName + "  " +"     " + CustomerLastName + "   !  "+"\n"
+						            +"<br><br>"+"Customer ID  :   " + "   " + CustomerID  + "<br>"+"Account  Number  :   " + "   " + AccountNo   +"<br>"+" Home Addres    :   " + "   " + HomeNo + " ,  " + Street + " ," + City + "  "
+						            +"<br>"+"Phone  Number  :   " + "   " + CustomerPhone + "<br>" +"<br><br>"+ "<input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'>" + "  " +"  "
+						           +"  " + "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>");
+						 
+						 
+					 }
+				 }
+				
+			}
+			catch(Exception e)
+			{
+				System.err.println(e.getMessage());
+			}
+			return "Incorrect UserName or Password";
+			
+			
+			
+			
+			
+			
+		}
+
 		
 		
 		
