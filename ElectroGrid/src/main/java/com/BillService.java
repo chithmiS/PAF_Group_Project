@@ -13,7 +13,6 @@ import org.jsoup.parser.Parser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-
 @Path("/Bills")
 public class BillService {
 	
@@ -48,6 +47,8 @@ public class BillService {
 					String output = billObj.insertBill(acc_number, name,month, power_consumption,amount);
 					return output;
 				}
+		
+		
 		@PUT
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_JSON)
@@ -74,8 +75,6 @@ public class BillService {
 		}
 		
 		
-		
-		
 		@DELETE
 		@Path("/")
 		@Consumes(MediaType.APPLICATION_XML)
@@ -93,7 +92,6 @@ public class BillService {
 		}
 		
 		
-		
 		@GET
 		@Path("/search")
 		@Produces(MediaType.TEXT_HTML)
@@ -107,11 +105,7 @@ public class BillService {
 			String bill_id = doc.select("bill_id").text();
 			
 			return billObj.searchBill(bill_id);
-		}
-		
-		
-		
-		
+		}		
 }
 
 
